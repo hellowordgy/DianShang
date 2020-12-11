@@ -29,18 +29,43 @@
 </table>
 <script>
     function LoIndex() {
+        var obj = {};
         var ClienteleId       = $("#Text1").val();
         var ClienteleName     = $("#Text2").val();
         var ClienteleNickName = $("#Text3").val();
         var ClientelePhone    = $("#Text4").val();
         var ClientelePicture  = $("#Text5").val();
-        var list = {
-            ClienteleId      :ClienteleId      ,
-            ClienteleName    :ClienteleName    ,
-            ClienteleNickName:ClienteleNickName,
-            ClientelePhone   :ClientelePhone   ,
-            ClientelePicture :ClientelePicture 
-        };
-     
+        //var list = {
+        //    ClienteleId      :ClienteleId      ,
+        //    ClienteleName    :ClienteleName    ,
+        //    ClienteleNickName:ClienteleNickName,
+        //    ClientelePhone   :ClientelePhone   ,
+        //    ClientelePicture :ClientelePicture 
+        //};
+        //$.post('http://localhost:58531/api/ClienteleIds/ResIndex', list, function (d) {
+        //    if (d) {
+        //        alert("添加成功");
+        //    }
+        //    else {
+        //        alert("添加失败");
+        //    }
+        //})
+        $.ajax({
+            url: "http://localhost:58531/api/ClienteleIds/ResIndex",
+            data: JSON.stringify( obj),
+            dataType: "json",
+            type: "post",
+            contentType: 'application/json',
+            //contentType: 'application/x-www-form-urlencoded',
+            //accepts: "application/x-www-form-urlencoded",
+            success: function (d) {
+                if (d) {
+                    alert("注册成功");
+                }
+                else {
+                    alert("注册失败");
+                }
+            }
+        })
     }
 </script>
