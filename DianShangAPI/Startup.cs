@@ -33,7 +33,8 @@ namespace DianShangAPI
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>
             options.AddPolicy("cor",
-            p => p.AllowAnyOrigin())
+            p => p.WithOrigins("http://localhost:58535", "http://localhost:58531")
+            .AllowAnyHeader().AllowAnyMethod().AllowCredentials())
             );
 
         }
@@ -54,13 +55,13 @@ namespace DianShangAPI
 
             app.UseRouting();
 
+            app.UseCors("cor");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            app.UseCors("cor");
         }
     }
 }

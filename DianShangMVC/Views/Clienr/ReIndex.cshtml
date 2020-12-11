@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "ReIndex";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<h1>ReIndex</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>客户姓名</td>
+            <td><input id="Text2" type="text" /></td>
+        </tr>
+        <tr>
+            <td>客户昵称</td>
+            <td><input id="Text3" type="text" /></td>
+        </tr>
+        <tr>
+            <td>客户手机号</td>
+            <td><input id="Text4" type="text" /></td>
+        </tr>
+        <tr>
+            <td>客户头像</td>
+            <td><input id="Text5" type="text" /></td>
+        </tr>
+        <tr>
+            <td><input id="Button1" type="button" value="注册" onclick="LoIndex()"/></td>
+        </tr>
+    </thead>
+</table>
+<script>
+    function LoIndex() {
+        var ClienteleId       = $("#Text1").val();
+        var ClienteleName     = $("#Text2").val();
+        var ClienteleNickName = $("#Text3").val();
+        var ClientelePhone    = $("#Text4").val();
+        var ClientelePicture  = $("#Text5").val();
+        var list = {
+            ClienteleId      :ClienteleId      ,
+            ClienteleName    :ClienteleName    ,
+            ClienteleNickName:ClienteleNickName,
+            ClientelePhone   :ClientelePhone   ,
+            ClientelePicture :ClientelePicture 
+        };
+        $.post('http://localhost:58531/api/ClienteleIds/ResIndex', list, function (d) {
+            if (d) {
+                alert("添加成功");
+            }
+            else {
+                alert("添加失败");
+            }
+        })
+    }
+</script>
