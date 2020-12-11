@@ -30,6 +30,12 @@ namespace DianShangAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+            //配置跨域处理，允许所有来源：
+            services.AddCors(options =>
+            options.AddPolicy("cor",
+            p => p.AllowAnyOrigin())
+            );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +60,7 @@ namespace DianShangAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseCors("cor");
         }
     }
 }

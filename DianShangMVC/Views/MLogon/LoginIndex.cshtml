@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "LoginIndex";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<h1>LoginIndex</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>姓名</td>
+            <td><input id="Text1" type="text" /></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input id="Password1" type="password" /></td>
+        </tr>
+        <tr>
+            <td><input id="Button1" type="button" value="添加" onclick="LoIndex()" /></td>
+        </tr>
+    </thead>
+</table>
+<script>
+    function LoIndex() {
+        var ClienteleRegister = $("#Text1").val();
+        var ClientelePassword = $("#Password1").val();
+        var list = {
+            ClienteleRegister: ClienteleRegister,
+            ClientelePassword: ClientelePassword
+        };
+        $.post('http://localhost:65072/api/DLogin/lg', list, function (d) {
+            if (d > 0) {
+                alert("添加成功");
+            }
+            else {
+                alert("添加失败");
+            }
+        })
+    }
+</script>
+
