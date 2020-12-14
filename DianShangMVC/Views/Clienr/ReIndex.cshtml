@@ -3,7 +3,7 @@
     ViewData["Title"] = "ReIndex";
 }
 <script src="~/Scripts/jquery-3.4.1.js"></script>
-<h1>ReIndex</h1>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -23,6 +23,10 @@
             <td><input id="Text5" type="text" /></td>
         </tr>
         <tr>
+            <td>手机号验证</td>
+            <td><input id="Button1" type="button" value="手机号"  onclick="Duan()"/></td>
+        </tr>
+        <tr>
             <td><input id="Button1" type="button" value="注册" onclick="LoIndex()"/></td>
         </tr>
     </thead>
@@ -30,11 +34,10 @@
 <script>
     function LoIndex() {
         var obj = {};
-        var ClienteleId       = $("#Text1").val();
-        var ClienteleName     = $("#Text2").val();
-        var ClienteleNickName = $("#Text3").val();
-        var ClientelePhone    = $("#Text4").val();
-        var ClientelePicture  = $("#Text5").val();
+        obj. ClienteleName     = $("#Text2").val();
+        obj. ClienteleNickName = $("#Text3").val();
+        obj. ClientelePhone    = $("#Text4").val();
+        obj. ClientelePicture = $("#Text5").val();
         //var list = {
         //    ClienteleId      :ClienteleId      ,
         //    ClienteleName    :ClienteleName    ,
@@ -52,10 +55,30 @@
         //})
         $.ajax({
             url: "http://localhost:58531/api/ClienteleIds/ResIndex",
-            data: JSON.stringify( obj),
+            data: JSON.stringify(obj),
             dataType: "json",
             type: "post",
-            contentType: 'application/json',
+            contentType: 'application/json;charset:UTF-8',
+            //contentType: 'application/x-www-form-urlencoded',
+            //accepts: "application/x-www-form-urlencoded",
+            success: function (d) {
+                if (d) {
+                    alert("注册成功");
+                }
+                else {
+                    alert("注册失败");
+                }
+            }
+        })
+        
+    }
+    function Duan() {
+        
+        $.ajax({
+            url: "http://localhost:58531/api/ClienteleIds/Duan",
+            dataType: "json",
+            type: "get",
+            contentType: 'application/json;charset:UTF-8',
             //contentType: 'application/x-www-form-urlencoded',
             //accepts: "application/x-www-form-urlencoded",
             success: function (d) {

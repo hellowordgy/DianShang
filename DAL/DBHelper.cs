@@ -11,7 +11,7 @@ namespace DbAccess
 {
     public static class DBHelper
     {
-        public static string strConn = "server=.;database=E_Commerce;Integrated Security=True;";
+        public static string strConn = "Data Source=.;Initial Catalog=E_Commerce;Integrated Security=True";
         //public static string strConn = ConfigurationManager.ConnectionStrings["SQLConnString"].ConnectionString;
 
 
