@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserLogonIndex</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="text">登录</div>
+            <div class="form-item">
+                <input type="text" id="Text1" placeholder="用户名">
+                <input type="password" id="password" placeholder="密码">
+            </div>
+            <div class="btn" onclick="UserLoIndex()">登录</div>
+            <div class="btn-back"></div>
+            <div class="other">
+                没有账号？<a href="#" onclick="Zhu()">去注册</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function UserLoIndex() {
+        var obj = {};
+        obj.UserName = $("#Text1").val();
+        obj.UserPassword = $("#password").val();
+        $.ajax({
+            url: "http://localhost:58531/api/ClienteleIds/UserLogin",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            type: "post",
+            contentType: 'application/json;charset:UTF-8',
+            success: function (d) {
+                if (d > 0) {
+                    alert("成功");
+                }
+                else {
+                    alert("失败");
+                }
+            }
+
+        })
+    }
+    function Zhu() {
+        location.href = '/Clienr/UserResIndex';
+    }
+</script>
+

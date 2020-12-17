@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserResIndex</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="text">注册</div>
+            <div class="form-item">
+                <input type="text" id="Text1" placeholder="用户名">
+                <input type="text" id="Text2" placeholder="用户账号">
+                <input type="password" id="password" placeholder="密码">
+                <input type="text" id="Text3" placeholder="手机号">
+            </div>
+            <div class="btn" onclick="UserLoIndex()">注册</div>
+            <div class="btn-back"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function UserLoIndex() {
+            var obj = {};
+        obj.UserName = $("#Text1").val();
+        obj.UserAccon = $("#Text2").val();
+        obj.UserPassword = $("#password").val();
+        obj.UserPhone = $("#Text3").val();
+            $.ajax({
+                url: "http://localhost:58531/api/ClienteleIds/UserLogin",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                type: "post",
+                contentType: 'application/json;charset:UTF-8',
+                //contentType: 'application/x-www-form-urlencoded',
+                //accepts: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    if (d) {
+                        alert("注册成功");
+                        location.href = "UserLogonIndex";
+                    }
+                    else {
+                        alert("注册失败");
+                    }
+                }
+            })
+        }
+    
+</script>
