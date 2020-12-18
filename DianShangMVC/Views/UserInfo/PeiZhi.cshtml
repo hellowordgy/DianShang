@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户配置角色</title>
+</head>
+<body>
+    <input id="Button1" type="button" value="返回" onclick="Fan()" />
+    <input id="Button1" type="button" value="配置" onclick="AnPai()" />
+    <input type="hidden" value="@ViewBag.id" id="userid" />
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                @*//<td><input id="Checkbox1" type="checkbox" onclick="quanxuan" /></td>*@
+                <td></td>
+                <td>角色名称</td>
+            </tr>
+            <tbody id="body">
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+    ii();
+    function ii() {
+        $.get('http://localhost:58531/api/UserInfo/Xuan', function (d) {
+            //console.log(d);
+            $("#body").empty();
+            $.each(d, function () {
+                console.log(d);
+                var str = "";
+                str += "<tr>";
+                str += '<td><input class="Checkbox1" type="checkbox" value=' + this.roleID + ' /></td>';
+                str += "<td>" + this.roleName + "</td>";
+                console.log(this.roleId);
+                str += "</tr>";
+                $("#body").append(str);
+            });
+        })
+    }
+    function AnPai() {
+        var str = "";
+        $.each($(".Checkbox1:checked"), function () {
+            str += "'" + this.value + "',";
+        })
+        var data = {};
+        data.uid = $("#userid").val();
+        data.rid = str;
+        $.ajax({
+            url: 'http://localhost:58531/api/userinfo/peizhi',
+            data: data,
+            type: "post",
+            contentType: 'application/x-www-form-urlencoded',
+            accepts: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                if (d = true) {
+                    alert("配置成功");
+                    location.href = "/UserInfo/Index";
+                }
+                else {
+                    alert("配置失败");
+                }
+            }
+        })
+    }
+    function Fan() {
+        location.href = "/UserInfo/Index";
+    }
+</script>

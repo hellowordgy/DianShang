@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户添加</title>
+</head>
+<body>
+    <table class="table table-bordered">
+        <tr>
+            <td>用户名称</td>
+            <td><input id="Text1" type="text" name="UserName"/></td>
+        </tr>
+        <tr>
+            <td>用户帐号</td>
+            <td><input id="Text2" type="text" name="UserAccon"/></td>
+        </tr>
+        <tr>
+            <td>用户密码</td>
+            <td><input id="Password1" type="password" /></td>
+        </tr>
+        <tr>
+            <td>用户手机号</td>
+            <td><input id="Text3" type="text" name="UserPhone"/></td>
+        </tr>
+        <tr>
+            <td><input id="Button1" type="button" value="添加" onclick="add()" /></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    function add() {
+        var obj = {};
+        obj.userName = $("#Text1").val();
+        obj.userAccon = $("#Text2").val();
+        obj.userPassword = $("#Password1").val();
+        obj.userPhone = $("#Text3").val();
+        $.ajax({
+            url: "http://localhost:58531/api/UserInfo/Add",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            type: "post",
+            contentType: 'application/json',
+            success: function (d) {
+                if (d>0) {
+                    alert("添加成功");
+                    location.href = "/UserInfo/Index";
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+</script>
