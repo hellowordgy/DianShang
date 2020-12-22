@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Model
 {
-    public class UserInfo
+    public class URInfo
     {
+        public Guid URid { get; set; }
+        public Guid Uid { get; set; }
+        public Guid Rid { get; set; }
+
         public Guid UserId { get; set; }
         public string UserName { get; set; }
         public string UserAccon { get; set; }
@@ -14,9 +18,5 @@ namespace Model
 
         public Guid RoleID { get; set; }
         public string RoleName { get; set; }
-
-        public Guid URid { get; set; }
-        public Guid Uid { get; set; }
-        public Guid Rid { get; set; }
     }
 }

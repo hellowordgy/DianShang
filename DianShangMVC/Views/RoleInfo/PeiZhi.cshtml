@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色配置菜单</title>
+</head>
+<body>
+    <input id="Button1" type="button" value="返回" onclick="Fan()" />
+    <input id="Button1" type="button" value="配置" onclick="AnPai()" />
+    <input type="hidden" value="@ViewBag.id" id="roleid" />
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <td><input id="Checkbox1" type="checkbox" onclick="quanxuan" /></td>
+                <td>菜单名称</td>
+            </tr>
+            <tbody id="body">
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+    ii();
+    function ii() {
+        $.get('http://localhost:58531/api/RoleInfo/Xuan', function (d) {
+            //console.log(d);
+            $("#body").empty();
+            $.each(d, function () {
+                var str = "";
+                str += "<tr>";
+                str += '<td><input class="Checkbox1" type="checkbox" value=' + this.menuID + ' /></td>';
+                str += "<td>" + this.menuName + "</td>";
+                console.log(this.menuID);
+                str += "</tr>";
+                $("#body").append(str);
+            });
+        })
+    }
+    function AnPai() {
+        var str = "";
+        $.each($(".Checkbox1:checked"), function () {
+            str += "'" + this.value + "',";
+        })
+        var data = {};
+        data.uid = $("#roleid").val();
+        data.rid = str;
+        $.ajax({
+            url: 'http://localhost:58531/api/roleInfo/peizhi',
+            data: data,
+            type: "post",
+            contentType: 'application/x-www-form-urlencoded',
+            accepts: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                if (d = true) {
+                    alert("配置成功");
+                    location.href = "/RoleInfo/Index";
+                }
+                else {
+                    alert("配置失败");
+                }
+            }
+        })
+    }
+    function Fan() {
+        location.href = "/RoleInfo/Index";
+    }
+</script>

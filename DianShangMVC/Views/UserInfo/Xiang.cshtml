@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户详情页面</title>
+</head>
+<body>
+    <div style="border:solid;width:inherit;height:50px">
+        <h3 style="display: block;line-height: 10px;text-align: center;">用户角色显示</h3>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>用户名称</th>
+                <th>角色名称</th>
+            </tr>
+        </thead>
+        <tbody id="body">
+        </tbody>
+    </table>
+    <input id="Button1" type="button" value="返回" onclick="Fan()" />
+</body>
+</html>
+<script>
+    ii();
+    function ii(id) {
+        $.get('http://localhost:58531/api/UserInfo/Xiang', function (d) {
+            $("#body").empty();
+            $.each(d, function () {
+                var str = "";
+                str += "<tr>";
+                str += "<td>" + this.userName + "</td>";
+                str += "<td>" + this.roleName + "</td>";
+                //console.log(this.userId);
+                str += "</tr>";
+                $("#body").append(str);
+            });
+        })
+    }
+    //返回按钮点击事件
+    function Fan() {
+        location.href = "/UserInfo/Index";
+    }
+</script>

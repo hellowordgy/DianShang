@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色添加</title>
+</head>
+<body>
+    <table class="table table-bordered">
+        <tr>
+            <td>角色名称</td>
+            <td><input id="Text1" type="text" name="RoleName" /></td>
+        </tr>
+        <tr>
+            <td><input id="Button1" type="button" value="添加" onclick="add()" /></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    function add() {
+        var obj = {};
+        obj.roleName = $("#Text1").val();
+        $.ajax({
+            url: "http://localhost:58531/api/RoleInfo/Add",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            type: "post",
+            contentType: 'application/json',
+            success: function (d) {
+                if (d > 0) {
+                    alert("添加成功");
+                    location.href = "/RoleInfo/Index";
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+</script>
