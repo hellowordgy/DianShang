@@ -35,17 +35,17 @@ namespace DAL
         //登录
         public int Logi(ClienteleIdO idO)
         {
-            string sql = $"insert into UserEnter (ClienteleRegister,ClientelePassword) values('{idO.ClienteleRegister}','{idO.ClientelePassword}')";
+            string sql = $"select * from UserEnter where ClienteleRegister='{idO.ClienteleRegister}' and ClientelePassword='{idO.ClientelePassword}'";
             return DbAccess.DBHelper.ExecuteNonQuery(sql);
         }
-        //用户注册
+        //用户登录
         public int UserRes(UserInfo info)
         {
             info.UserPassword = MD5Helper.GetMD5(info.UserPassword);
             string sql = $"select * from UserInfo where UserName='{info.UserName}' and UserPassword='{info.UserPassword}'";
             return DbAccess.DBHelper.ExecuteNonQuery(sql);
         }
-        //用户登录
+        //用户注册
         public int UserLogin(UserInfo info)
         {
             string sql = $"insert into UserInfo values(newid(),'{info.UserName}','{info.UserAccon}','{info.UserPassword}','{info.UserPhone}')";

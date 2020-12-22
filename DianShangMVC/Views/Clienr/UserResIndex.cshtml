@@ -30,18 +30,25 @@
 </html>
 <script>
     function UserLoIndex() {
-            var obj = {};
+        var obj = {};
+        
         obj.UserName = $("#Text1").val();
         obj.UserAccon = $("#Text2").val();
         obj.UserPassword = $("#password").val();
         obj.UserPhone = $("#Text3").val();
+        var a = $("#Text3").val();
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(a)) {
+            alert('请输入正确的手机号');
+            return;
+        } else {
             $.ajax({
                 url: "http://localhost:58531/api/ClienteleIds/UserLogin",
                 data: JSON.stringify(obj),
                 dataType: "json",
                 type: "post",
                 contentType: 'application/json;charset:UTF-8',
-                //contentType: 'application/x-www-form-urlencoded',
+                //contentType: 'application/x-www-form-urlencoded',              
                 //accepts: "application/x-www-form-urlencoded",
                 success: function (d) {
                     if (d) {
@@ -53,6 +60,7 @@
                     }
                 }
             })
+        }
         }
     
 </script>
