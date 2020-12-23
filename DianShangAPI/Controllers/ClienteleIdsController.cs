@@ -26,10 +26,9 @@ namespace DianShangAPI.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public ActionResult Logon(ClienteleIdO idO)
+        public List<ClienteleIdO> Logon(ClienteleIdO idO)
         {
-            int i = day.Logi(idO);
-            return Ok(i);
+            return day.Logi(idO);
         }
         [HttpPost]
         [Route("UserRes")]
