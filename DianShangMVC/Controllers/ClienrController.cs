@@ -25,8 +25,8 @@ namespace DianShangMVC.Controllers
 
         public JsonResult Page_Load(string mobile/*,object sender, EventArgs e*/)
         {
-            string account = "C53036055";//查看用户名 登录用户中心->验证码通知短信>产品总览->API接口信息->APIID
-            string password = "65b7e86f518f92380df9d4ea75171fa7"; //查看密码 登录用户中心->验证码通知短信>产品总览->API接口信息->APIKEY
+            string account = "C74015618";//查看用户名 登录用户中心->验证码通知短信>产品总览->API接口信息->APIID
+            string password = "50c1ddffa551e37553336fca56db7528"; //查看密码 登录用户中心->验证码通知短信>产品总览->API接口信息->APIKEY
                                                                   // string mobile = HttpContext.Request.Query["mobile"];
             Random rad = new Random();
             int mobile_code = rad.Next(1000, 10000);

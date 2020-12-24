@@ -35,7 +35,7 @@ namespace DAL
             string json = JsonConvert.SerializeObject(dt);
             RoleInfo r = JsonConvert.DeserializeObject<List<RoleInfo>>(json).FirstOrDefault();
             return r;
-        }
+        } 
         //角色修改
         public int UpdRoleInfo(RoleInfo r)
         {

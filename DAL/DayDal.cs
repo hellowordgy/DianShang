@@ -33,10 +33,11 @@ namespace DAL
             return dt;
         }
         //登录
-        public int Logi(ClienteleIdO idO)
+        public List<ClienteleIdO> Logi(ClienteleIdO idO)
         {
-            string sql = $"select * from UserEnter where ClienteleRegister='{idO.ClienteleRegister}' and ClientelePassword='{idO.ClientelePassword}'";
-            return DbAccess.DBHelper.ExecuteNonQuery(sql);
+            idO.ClientelePassword = MD5Helper.GetMD5(idO.ClientelePassword);
+            string sql = $"select * from UserEnter where ClienteleRegister='{idO.ClienteleRegister}' and ClientelePassword='{idO.ClientelePassword}' ";
+            return DbAccess.DBHelper.GetToList<ClienteleIdO>(sql);
         }
         //用户登录
         public int UserRes(UserInfo info)
