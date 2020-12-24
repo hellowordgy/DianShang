@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>商品添加</title>
+</head>
+<body>
+    <table class="table table-bordered">
+        <tr>
+            <td>商品名称</td>
+            <td><input id="Text1" type="text" name="GoodsName" /></td>
+        </tr>
+        <tr>
+            <td>商品图片</td>
+            <td>
+                <input id="File1" type="file" name="file" />
+            </td>
+        </tr>
+        <tr>
+            <td>商品品牌</td>
+            <td>
+                <select id="Select1">
+                    <option>纪梵希</option>
+                    <option>圣罗兰</option>
+                    <option>卡姿兰</option>
+                    <option>萝卜丁</option>
+                    <option>雅诗兰黛</option>
+                    <option>花西子</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>库存</td>
+            <td><input id="Text4" type="text" name="SKURepertory" /></td>
+        </tr>
+        <tr>
+            <td>价格</td>
+            <td><input id="Text5" type="text" name="SKUprice" /></td>
+        </tr>
+        <tr>
+            <td>是否上架</td>
+            <td>
+                <input id="Radio1" type="radio" value="是" />是
+                <input id="Radio1" type="radio" value="否" />否
+            </td>
+        </tr>
+        <tr>
+            <td><input id="Button1" type="button" value="添加" onclick="add()" /></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    function add() {
+        var obj = {};
+        obj.goodsName = $("#Text1").val();
+        obj.imgLink = $("#Text2").val();
+        obj.brandName = $("#Select1").val();
+        obj.sKURepertory = $("#Text4").val();
+        obj.sKUprice = $("#Text5").val();
+        obj.ifAdded = $("#Radio1").val();
+        $.ajax({
+            url: "http://localhost:58531/api/GoodsSpu/Add",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            type: "post",
+            contentType: 'application/json',
+            success: function (d) {
+                if (d > 0) {
+                    alert("添加成功");
+                    location.href = "/GoodsSpu/Index";
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+</script>
